@@ -735,7 +735,6 @@ namespace Assistant
             CommMutex.WaitOne();
             fixed (byte* ptr = data)
             {
-                Packet.Log(PacketPath.RazorToClient, ptr, data.Length);
                 CopyToBuffer(m_OutRecv, ptr, data.Length);
             }
 
@@ -753,7 +752,6 @@ namespace Assistant
             InitSendFlush();
             fixed (byte* ptr = data)
             {
-                Packet.Log(PacketPath.RazorToServer, ptr, data.Length);
                 CopyToBuffer(m_OutSend, ptr, data.Length);
             }
 
@@ -842,14 +840,12 @@ namespace Assistant
                     byte[] data = p.Compile();
                     fixed (byte* ptr = data)
                     {
-                        Packet.Log(path, ptr, data.Length, blocked);
                         if (!blocked)
                             CopyToBuffer(outBuff, ptr, data.Length);
                     }
                 }
                 else
                 {
-                    Packet.Log(path, buff, len, blocked);
                     if (!blocked)
                         CopyToBuffer(outBuff, buff, len);
                 }
@@ -861,7 +857,6 @@ namespace Assistant
                     fixed (byte* ptr = data)
                     {
                         CopyToBuffer(outBuff, ptr, data.Length);
-                        Packet.Log((PacketPath) (((int) path) + 1), ptr, data.Length);
                     }
                 }
             }

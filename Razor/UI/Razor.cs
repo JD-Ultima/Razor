@@ -329,8 +329,6 @@ namespace Assistant
 
             negotiate.SafeAction(s => { s.Checked = Config.GetBool("Negotiate"); });
 
-            logPackets.SafeAction(s => { s.Checked = Config.GetBool("LogPacketsByDefault"); });
-
             healthFmt.SafeAction(s =>
             {
                 s.Enabled = showHealthOH.Checked = Config.GetBool("ShowHealth");
@@ -2300,22 +2298,6 @@ namespace Assistant
                   Counter.Redraw( counters );
              }
         }*/
-
-        private void logPackets_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (logPackets.Checked)
-            {
-                if (m_Initializing || MessageBox.Show(this, Language.GetString(LocString.PacketLogWarn), "Caution!",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                    Packet.Logging = true;
-                else
-                    logPackets.Checked = false;
-            }
-            else
-            {
-                Packet.Logging = false;
-            }
-        }
 
         private void showNotoHue_CheckedChanged(object sender, System.EventArgs e)
         {

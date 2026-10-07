@@ -286,11 +286,6 @@ namespace Assistant
                     length = (int) packet.Length;
                 }
 
-                if (Packet.Logging)
-                {
-                    Packet.Log(PacketPath.ServerToClient, ptr, data.Length, !result);
-                }
-
                 return result;
             }
         }
@@ -320,11 +315,6 @@ namespace Assistant
 
                     data = packet.Compile();
                     length = (int) packet.Length;
-                }
-
-                if (Packet.Logging)
-                {
-                    Packet.Log(PacketPath.ClientToServer, ptr, data.Length, !result);
                 }
 
                 return result;
@@ -552,14 +542,6 @@ namespace Assistant
             int length = (int) p.Length;
 
             _sendToClient(ref data, ref length);
-
-            if (Packet.Logging)
-            {
-                fixed (byte* ptr = data)
-                {
-                    Packet.Log(PacketPath.RazorToClient, ptr, data.Length);
-                }
-            }
         }
 
         public override unsafe void ForceSendToServer(Packet p)
@@ -568,14 +550,6 @@ namespace Assistant
             int length = (int) p.Length;
 
             _sendToServer(ref data, ref length);
-
-            if (Packet.Logging)
-            {
-                fixed (byte* ptr = data)
-                {
-                    Packet.Log(PacketPath.RazorToServer, ptr, data.Length);
-                }
-            }
         }
 
         public override void SetPosition(uint x, uint y, uint z, byte dir)

@@ -152,7 +152,6 @@ namespace Assistant
             AddProperty("MapW", 200);
             AddProperty("MapH", 200);
 
-            AddProperty("LogPacketsByDefault", false);
 
             AddProperty("ShowHealth", true);
             AddProperty("HealthFmt", "[{0}%]");

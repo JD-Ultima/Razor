@@ -789,7 +789,6 @@ namespace Assistant
             this.openRazorDataDir = new System.Windows.Forms.Button();
             this.msglvl = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.logPackets = new System.Windows.Forms.CheckBox();
             this.statusBox = new System.Windows.Forms.TextBox();
             this.features = new System.Windows.Forms.TextBox();
             this.advancedStaffDeco = new System.Windows.Forms.TabPage();
@@ -5410,7 +5409,6 @@ namespace Assistant
             this.advancedInfoTab.Controls.Add(this.openRazorDataDir);
             this.advancedInfoTab.Controls.Add(this.msglvl);
             this.advancedInfoTab.Controls.Add(this.label17);
-            this.advancedInfoTab.Controls.Add(this.logPackets);
             this.advancedInfoTab.Controls.Add(this.statusBox);
             this.advancedInfoTab.Controls.Add(this.features);
             this.advancedInfoTab.Location = new System.Drawing.Point(4, 24);
@@ -5554,16 +5552,6 @@ namespace Assistant
             this.label17.TabIndex = 86;
             this.label17.Text = "Razor messages:";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // logPackets
-            // 
-            this.logPackets.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.logPackets.Location = new System.Drawing.Point(240, 27);
-            this.logPackets.Name = "logPackets";
-            this.logPackets.Size = new System.Drawing.Size(146, 23);
-            this.logPackets.TabIndex = 85;
-            this.logPackets.Text = "Enable packet logging";
-            this.logPackets.CheckedChanged += new System.EventHandler(this.logPackets_CheckedChanged);
             // 
             // statusBox
             // 
@@ -6296,7 +6284,6 @@ namespace Assistant
         private Button openRazorDataDir;
         private ComboBox msglvl;
         private Label label17;
-        private CheckBox logPackets;
         private TextBox statusBox;
         private TextBox features;
         private TabPage advancedStaffDeco;
