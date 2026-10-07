@@ -33,41 +33,6 @@ namespace Assistant
 
     public class Packet
     {
-        private static bool m_Logging = false;
-
-        public static bool Logging
-        {
-            get { return m_Logging; }
-            set
-            {
-                if (value != m_Logging)
-                {
-                    m_Logging = value;
-                    if (m_Logging)
-                        BeginLog();
-                }
-            }
-        }
-
-        public static string PacketsLogFile
-        {
-            get { return Path.Combine(Config.GetInstallDirectory(), "Razor_Packets.log"); }
-        }
-
-        private static void BeginLog()
-        {
-            using (StreamWriter sw = new StreamWriter(PacketsLogFile, true))
-            {
-                sw.AutoFlush = true;
-                sw.WriteLine();
-                sw.WriteLine();
-                sw.WriteLine();
-                sw.WriteLine(">>>>>>>>>> Logging started {0} <<<<<<<<<<", DateTime.UtcNow);
-                sw.WriteLine();
-                sw.WriteLine();
-            }
-        }
-
         private static byte[] m_Buffer = new byte[4]; // Internal format buffer.
         private MemoryStream m_Stream;
         private bool m_DynSize;
@@ -160,76 +125,6 @@ namespace Assistant
 
              return code;
         }*/
-
-        public static void Log(string line, params object[] args)
-        {
-            Log(string.Format(line, args));
-        }
-
-        public static void Log(string line)
-        {
-            if (!m_Logging)
-                return;
-
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(PacketsLogFile, true))
-                {
-                    sw.AutoFlush = true;
-                    sw.WriteLine(line);
-                    sw.WriteLine();
-                }
-            }
-            catch
-            {
-            }
-        }
-
-        public static unsafe void Log(PacketPath path, byte* buff, int len, bool blocked = false)
-        {
-            if (!m_Logging)
-                return;
-
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(PacketsLogFile, true))
-                {
-                    sw.AutoFlush = true;
-
-                    string pathStr;
-                    switch (path)
-                    {
-                        case PacketPath.ClientToServer:
-                            pathStr = "Client -> Server";
-                            break;
-                        case PacketPath.RazorToServer:
-                            pathStr = "Razor -> Server";
-                            break;
-                        case PacketPath.ServerToClient:
-                            pathStr = "Server -> Client";
-                            break;
-                        case PacketPath.RazorToClient:
-                            pathStr = "Razor -> Client";
-                            break;
-                        default:
-                            pathStr = "Unknown -> Unknown";
-                            break;
-                    }
-
-                    sw.WriteLine("{0:HH:mm:ss.ffff}: {1}{2}0x{3:X2} (Length: {4})", Engine.MistedDateTime,
-                        pathStr, blocked ? " [BLOCKED] " : " ", buff[0], len);
-                    
-                    Utility.FormatBuffer(sw, buff, len);
-                    
-                    sw.WriteLine();
-                    sw.WriteLine();
-                }
-            }
-            catch
-            {
-                // ignored
-            }
-        }
 
         public long Seek(int offset, SeekOrigin origin)
         {
